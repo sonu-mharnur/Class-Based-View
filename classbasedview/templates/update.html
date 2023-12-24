@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+
+    <form action="{% url 'details' comment.id %}" method='POST'>
+        {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Add Comment</label>
+            <textarea name='updated_comment' class="form-control" id="exampleFormControlTextarea1" rows="3">{{ comment.comment }}</textarea>
+          </div>
+
+        <button type="submit">Update Comment</button>
+    </form>
+
+    <br>
+    <a href="{% url 'delete' comment.id %}" class="button"> Delete Comment</a>
+</div>
+{% endblock content %}
+

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+
+    <form action="{% url 'add' %}" method='POST'>
+        {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Add Comment</label>
+            <textarea name='comment' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+
+        <button type="submit">Add Comment</button>
+    </form>
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">comments</th>
+            <th scope="col">Updated At</th>
+          </tr>
+        </thead>
+        <tbody>
+         {% for record in comments %}
+         
+        
+            <tr>
+                <th scope="row"> {{ forloop.counter }}</th>
+                <td><a href="{% url 'details' record.id %}"> {{ record.comment }} </a></td>
+                <td>Updated {{ record.updatedat|timesince }} ago</td>
+            </tr>
+        
+         {% endfor %}
+        </tbody>
+      </table>
+
+</div>
+{% endblock content %}
